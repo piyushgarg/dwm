@@ -202,7 +202,7 @@ static const Key keys[] = {
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
     { ControlMask|Mod1Mask,			XK_l,		    spawn,		SHCMD("mpc pause; pauseallmpv ; betterlockscreen -l blur --off 60") },
-    { ControlMask|Mod1Mask,			XK_Delete,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
+    { ControlMask|Mod1Mask,			XK_Delete,		spawn,		{.v = (const char*[]){ "sudo", "-A", "zzz", NULL } } },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
@@ -336,3 +336,4 @@ static const Button buttons[] = {
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 };
+
