@@ -2,6 +2,7 @@
 
 /* Constants */
 #define TERMINAL "st"
+#define TERMINAL2 "kitty"
 #define TERMCLASS "St"
 #define BROWSER "librewolf"
 
@@ -104,7 +105,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *termcmd[]  = { TERMINAL2, NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -164,11 +165,11 @@ static const Key keys[] = {
 	{ MODKEY,			XK_q,          killclient,             {0} },
 	{ MODKEY|ShiftMask,		XK_q,          spawn,                  {.v = (const char*[]){ "sysact", NULL } } },
 	{ MODKEY,			XK_w,          spawn,                  {.v = (const char*[]){ BROWSER, NULL } } },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
-	{ MODKEY,			XK_e,		spawn,		SHCMD("kitty -e email") },
-	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook --datafile ~/.config/mutt/abook/addressbook") },
-	{ MODKEY,			XK_r,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "lfub", NULL } } },
-	{ MODKEY|ShiftMask,		XK_r,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL2, "-e", "sudo", "nmtui", NULL } } },
+	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL2 " -e email") },
+	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL2 " -e abook --datafile ~/.config/mutt/abook/addressbook") },
+	{ MODKEY,			XK_r,          spawn,                  {.v = (const char*[]){ TERMINAL2, "-e", "lfub", NULL } } },
+	{ MODKEY|ShiftMask,		XK_r,          spawn,                  {.v = (const char*[]){ TERMINAL2, "-e", "htop", NULL } } },
 	{ MODKEY,			XK_t,          setlayout,              {.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,          setlayout,              {.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,          setlayout,              {.v = &layouts[2]} }, /* spiral */
@@ -243,7 +244,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F1,         spawn,                  SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
 	{ MODKEY,			XK_F2,         spawn,                  {.v = (const char*[]){ "tutorialvids", NULL } } },
 	{ MODKEY,			XK_F3,         spawn,                  {.v = (const char*[]){ "displayselect", NULL } } },
-	{ MODKEY,			XK_F4,         spawn,                  SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_F4,         spawn,                  SHCMD(TERMINAL2 " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_F5,         xrdb,                   {.v = NULL } },
 	{ MODKEY,			XK_F6,         spawn,                  {.v = (const char*[]){ "torwrap", NULL } } },
 	{ MODKEY,			XK_F7,         spawn,                  {.v = (const char*[]){ "td-toggle", NULL } } },
@@ -280,9 +281,9 @@ static const Key keys[] = {
 	{ 0, XF86XK_WWW,                               spawn,                  {.v = (const char*[]){ BROWSER, NULL } } },
 	{ 0, XF86XK_DOS,                               spawn,                  {.v = termcmd } },
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("betterlockscreen -l --off 60 & xset dpms force off; mpc pause; pauseallmpv") },
-	{ 0, XF86XK_TaskPane,                          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
+	{ 0, XF86XK_TaskPane,                          spawn,                  {.v = (const char*[]){ TERMINAL2, "-e", "htop", NULL } } },
 	{ 0, XF86XK_Mail,		spawn,		SHCMD("kitty -e email ; pkill -RTMIN+12 dwmblocks") },
-	{ 0, XF86XK_MyComputer,                        spawn,                  {.v = (const char*[]){ TERMINAL, "-e",  "lfub",  "/", NULL } } },
+	{ 0, XF86XK_MyComputer,                        spawn,                  {.v = (const char*[]){ TERMINAL2, "-e",  "lfub",  "/", NULL } } },
 	/* { 0, XF86XK_Battery,                        spawn,                  SHCMD("") }, */
 	{ 0, XF86XK_Launch1,                           spawn,                  {.v = (const char*[]){ "xset", "dpms", "force", "off", NULL } } },
 	{ 0, XF86XK_TouchpadToggle,                    spawn,                  SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
@@ -322,7 +323,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,                   Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,           Button1,        sigdwmblocks,   {.i = 6} },
 #endif
-	{ ClkStatusText,        ShiftMask,           Button3,        spawn,          SHCMD(TERMINAL " -e nvim ~/.local/src/dwmblocks/config.h") },
+	{ ClkStatusText,        ShiftMask,           Button3,        spawn,          SHCMD(TERMINAL2 " -e nvim ~/.local/src/dwmblocks/config.h") },
 	{ ClkClientWin,         MODKEY,              Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,              Button2,        defaultgaps,    {0} },
 	{ ClkClientWin,         MODKEY,              Button3,        resizemouse,    {0} },
